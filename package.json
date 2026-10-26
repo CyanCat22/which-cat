@@ -1,0 +1,23 @@
+{
+  "name": "which-cat",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "你是哪只猫 —— 竖屏 H5 人格测试小游戏，10 道题测出你的猫，带图鉴收集与评论区挑战赛，纯前端零依赖",
+  "scripts": {
+    "start": "node server.mjs",
+    "serve": "node server.mjs",
+    "check": "node --check js/config.js && node --check js/art.js && node --check js/art-extra.js && node --check js/audio.js && node --check js/xhs.js && node --check js/challenge.js && node --check js/collection.js && node --check js/quiz.js && node --check js/card.js && node --check js/main.js",
+    "test": "node tests/qa-func.mjs",
+    "test:minitool": "node tests/minitool.mjs",
+    "minitool": "node scripts/build-minitool.mjs",
+    "shots": "node tests/shots.mjs",
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^23.11.1"
+  }
+}

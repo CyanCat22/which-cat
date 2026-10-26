@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#fff7ec">
+<meta name="description" content="你是哪只猫 · 10 道题测出你藏在身体里的那只猫，附 10 只猫的图鉴收集与评论区挑战。">
+<title>你是哪只猫 · 10 道题测出你的人格猫</title>
+<link rel="icon" href="./assets/icon-192.png">
+<link rel="apple-touch-icon" href="./assets/icon-180.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <!-- ============ 首页 ============ -->
+  <section id="intro" class="screen show">
+    <div class="intro-top">
+      <div class="brand">你是哪只猫</div>
+      <div class="brand-sub">10 道题，测出你藏在身体里的那只猫</div>
+    </div>
+
+    <div id="rival-banner" class="rival hidden">
+      <div class="rival-line">
+        <b id="rival-name">橘座</b> 测出了「<span id="rival-cat">银渐层·高冷总裁</span>」
+      </div>
+      <button id="btn-rival" class="btn-mini">我也来测</button>
+    </div>
+
+    <div class="hero-cat" id="hero-cat">
+      <canvas id="intro-cat" width="200" height="200" aria-label="今日猫猫"></canvas>
+      <div class="hero-bubble">?</div>
+    </div>
+
+    <div class="daily" id="daily-chip">今日同题 · 每天换一套</div>
+
+    <div class="coll-card">
+      <div class="coll-head">
+        <span class="coll-title">猫猫图鉴</span>
+        <span class="coll-num"><b id="coll-count">0</b>/10</span>
+      </div>
+      <div class="coll-track"><div id="coll-fill" class="coll-fill"></div></div>
+      <div class="coll-foot">
+        <span id="coll-title-text">猫猫观察员</span>
+        <span id="coll-remain">还差 10 只集齐</span>
+      </div>
+    </div>
+
+    <div class="last-line hidden" id="last-line">上次测出：<b id="last-cat">—</b></div>
+
+    <div class="nick-row">
+      <label for="nick">猫名</label>
+      <input id="nick" maxlength="8" placeholder="路人猫" autocomplete="off">
+    </div>
+
+    <div class="btn-col">
+      <button id="btn-start" class="btn-primary">开始测试</button>
+      <button id="btn-gallery" class="btn-ghost">我的图鉴</button>
+    </div>
+
+    <div class="footnote">同一天所有人做的是同一套题（题号 <span id="day-code">------</span>）</div>
+  </section>
+
+  <!-- ============ 答题 ============ -->
+  <section id="quiz" class="screen">
+    <div class="quiz-head">
+      <div class="quiz-progress"><span id="q-now">1</span>/<span id="q-total">10</span></div>
+      <div class="q-track"><div id="q-fill" class="q-fill"></div></div>
+      <button id="btn-quit-quiz" class="btn-x" aria-label="退出">×</button>
+    </div>
+    <div class="q-text" id="q-text">题目</div>
+    <div class="opt-list" id="opt-list"></div>
+    <div class="quiz-foot">
+      <button id="btn-back" class="btn-mini">上一题</button>
+      <span class="quiz-hint">选一个最像你的</span>
+    </div>
+  </section>
+
+  <!-- ============ 结果 ============ -->
+  <section id="result" class="screen">
+    <div class="res-scroll">
+      <div class="res-hero">
+        <canvas id="result-cat" width="280" height="280"></canvas>
+        <div class="res-name" id="res-name">布偶糖·黏人精</div>
+        <div class="res-tagline" id="res-tagline">你在哪，我在哪</div>
+        <div class="res-match">匹配度 <b id="res-match">88%</b></div>
+        <div class="kw-row" id="res-kw"></div>
+      </div>
+
+      <div class="unlock-banner hidden" id="unlock-banner">新图鉴解锁！</div>
+
+      <div class="panel">
+        <div class="panel-title">五维画像</div>
+        <div id="res-bars" class="bar-list"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">你这只猫</div>
+        <p class="res-desc" id="res-desc"></p>
+        <div class="guide">
+          <div class="guide-row"><span class="guide-k">喜欢</span><span class="guide-v" id="res-likes"></span></div>
+          <div class="guide-row"><span class="guide-k">受不了</span><span class="guide-v" id="res-hates"></span></div>
+          <div class="guide-row"><span class="guide-k">怎么摸</span><span class="guide-v" id="res-touch"></span></div>
+        </div>
+      </div>
+
+      <div class="panel coll-mini">
+        <div class="panel-title">猫猫图鉴</div>
+        <div class="coll-head">
+          <span class="coll-num"><b id="res-coll-count">0</b>/10</span>
+          <span id="res-coll-title">猫猫观察员</span>
+        </div>
+        <div class="coll-track"><div id="res-coll-fill" class="coll-fill"></div></div>
+        <div class="res-compare hidden" id="res-compare"></div>
+      </div>
+
+      <div class="btn-col res-btns">
+        <button id="btn-again" class="btn-ghost">再测一次</button>
+        <button id="btn-gallery2" class="btn-ghost">看我的图鉴</button>
+      </div>
+      <div class="res-foot">同一天同一套题 · 评论区报你的猫</div>
+    </div>
+    <div class="res-cta">
+      <button id="btn-card" class="btn-primary">生成挑战卡</button>
+    </div>
+  </section>
+
+  <!-- ============ 图鉴 ============ -->
+  <section id="gallery" class="screen">
+    <div class="gal-head">
+      <div class="gal-title">猫猫图鉴 <span id="gal-count">0</span>/10</div>
+      <div class="gal-sub" id="gal-title-text">猫猫观察员</div>
+      <button id="btn-close-gallery" class="btn-x" aria-label="关闭">×</button>
+    </div>
+    <div class="gal-grid" id="gal-grid"></div>
+    <div class="gal-tip" id="gal-tip">测出过的猫会亮起来，点进来看它的相处说明书</div>
+  </section>
+
+  <!-- ============ 挑战面板 ============ -->
+  <section id="challenge" class="screen">
+    <div class="chal-scroll">
+      <div class="chal-title">你的猫猫战绩卡</div>
+      <img id="challenge-img" alt="挑战卡">
+      <div class="chal-btns">
+        <button id="btn-note" class="btn-primary">发挑战笔记</button>
+        <button id="btn-comment" class="btn-ghost">贴到评论区</button>
+        <button id="btn-save" class="btn-ghost">存到相册</button>
+        <button id="btn-copy" class="btn-ghost">查看文案</button>
+      </div>
+      <div class="chal-tip" id="challenge-tip">发笔记或贴评论，叫朋友来测同一套题</div>
+      <button id="btn-close-challenge" class="btn-text">返回</button>
+    </div>
+  </section>
+
+  <!-- ============ 猫猫详情 ============ -->
+  <section id="detail" class="screen">
+    <div class="detail-scroll">
+      <canvas id="detail-cat" width="240" height="240"></canvas>
+      <div class="res-name" id="detail-name"></div>
+      <div class="res-tagline" id="detail-tagline"></div>
+      <p class="res-desc" id="detail-desc"></p>
+      <div class="guide">
+        <div class="guide-row"><span class="guide-k">喜欢</span><span class="guide-v" id="detail-likes"></span></div>
+        <div class="guide-row"><span class="guide-k">受不了</span><span class="guide-v" id="detail-hates"></span></div>
+        <div class="guide-row"><span class="guide-k">怎么摸</span><span class="guide-v" id="detail-touch"></span></div>
+      </div>
+      <div class="detail-meta" id="detail-meta"></div>
+      <button id="btn-close-detail" class="btn-text">返回图鉴</button>
+    </div>
+  </section>
+
+  <button id="btn-mute" class="corner mute" aria-label="声音">🔊</button>
+  <div id="toast" class="toast"></div>
+</div>
+
+<script src="js/compat.js"></script>
+<script src="js/config.js"></script>
+<script src="js/art.js"></script>
+<script src="js/art-extra.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/xhs.js"></script>
+<script src="js/challenge.js"></script>
+<script src="js/collection.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/card.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
