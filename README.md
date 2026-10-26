@@ -2,6 +2,8 @@
 
 10 道题，测出你藏在身体里的那只猫。竖屏 H5 人格测试，纯前端零依赖，可直接打包成小红书小工具。
 
+**在线玩**：<https://cyancat22.github.io/which-cat/>
+
 > 同一天所有人做的是**同一套题**（题号相同），所以结果能直接在评论区对照——这就是它的「评论区挑战赛」玩法。
 > 测出来的猫会进「猫猫图鉴」，换着答法多测几次，把 10 只猫收齐。
 
@@ -90,6 +92,14 @@ npm run check          # 全部脚本语法检查
 ```
 
 `window.WHICH` 暴露了测试接口（`start / answerAll / evaluate / collection / challenge / ui / storage` 等），所有断言都走真实点击和真实 Canvas 像素。
+
+## 部署
+
+```bash
+./deploy.sh            # 推到 CyanCat22/which-cat 并触发 Pages
+```
+
+线上地址 <https://cyancat22.github.io/which-cat/>（GitHub Pages，`main` 分支根目录，带 `.nojekyll`）。
 
 ## 小工具打包
 
